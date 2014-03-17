@@ -9,7 +9,7 @@ require './lib/list'
 @current_list
 
 def main_menu
-	puts "Welcome to your To-Do List Manager!"
+	puts "\nWelcome to your To-Do List Manager!"
 	puts "Please choose an option:"
 	puts "\tPress 'n' to create a new list"
 	puts "\tPress 'v' to view all of your lists"
@@ -46,13 +46,15 @@ def new_list
 end
 
 def view_lists
+	puts "\n"
 	List.all.each_with_index do |list, index|
 		puts "#{index + 1}. #{list.name}"
 	end
+	puts "\n"
 end
 
 def all_lists_menu
-	puts "Enter the number of the list you wish to update"
+	puts "\nEnter the number of the list you wish to update"
 	puts "Enter 'm' to return to the main menu"
 
 	user_input = gets.chomp
@@ -71,7 +73,7 @@ end
 
 def list_menu
 	view_list_tasks
-	puts "Options for the list '#{@current_list.name}'"
+	puts "\nOptions for the list '#{@current_list.name}'"
 	puts "\tPress 'n' to add a new task"
 	puts "\tPress 'd' to delete the whole list"
 	puts "\tPress the task number to edit or delete a task"
@@ -100,7 +102,7 @@ def list_menu
 end
 
 def new_task
-	puts "Enter a description of your new task"
+	puts "\nEnter a description of your new task"
 	new_description = gets.chomp
 	puts "Enter a due date"
 	new_due_date = gets.chomp
@@ -110,11 +112,11 @@ def new_task
 end
 
 def view_all_tasks
-	puts "Enter 'ASC' to view tasks in ascending order (soonest due listed first): "
+	puts "\nEnter 'ASC' to view tasks in ascending order (soonest due listed first): "
 	puts "Eneter 'DESC' to view tasks in descending order (furthest away listed first): "
 
 	order_choice = gets.chomp
-	puts "Incomplete Tasks:" 
+	puts "\nIncomplete Tasks:" 
 	Task.all(order_choice).each_with_index do |task, index|
 		if !task.done?
 			puts "#{index + 1}. #{task.name} - Due: #{task.due_date}"
@@ -130,7 +132,7 @@ def view_all_tasks
 end
 
 def all_tasks_menu	
-	puts "Enter the number of a task to edit it"
+	puts "\nEnter the number of a task to edit it"
 	puts "Press 'm' to return to the main menu"
 
 	task_choice = gets.chomp
@@ -163,20 +165,20 @@ def task_menu
 		@current_task.delete
 		main_menu
 	when 'd'
-		puts "What would you like the new due date to be (enter a date surrounded by single quotes)?"
+		puts "What would you like the new due date to be?"
 		new_due_date = gets.chomp
 		@current_task.set_due_date(new_due_date)
 		main_menu
 	when 'm'
 		main_menu
 	else
-		puts "That was not a valid input. Please choose again"
+		puts "That was not a valid input. Please choose again\n"
 		task_menu
 	end
 end
 
 def view_list_tasks
-	puts "Incomplete tasks:"
+	puts "\nIncomplete tasks:"
 	@current_list.tasks.each_with_index do |task, index|
 		if !task.done?
 			puts "#{index + 1}. #{task.name} - Due: #{task.due_date}"

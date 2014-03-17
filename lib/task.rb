@@ -22,7 +22,7 @@ class Task
 
 	def set_due_date(date)
 		@due_date = date
-		DB.exec("UPDATE tasks SET due_date = #{date} WHERE name = '#{@name}' and list_id = #{list_id}")
+		DB.exec("UPDATE tasks SET due_date = '#{date}' WHERE name = '#{@name}' and list_id = #{list_id}")
 	end
 
 	def self.all(order = 'ASC')
